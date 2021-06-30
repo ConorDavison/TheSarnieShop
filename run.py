@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -73,14 +73,15 @@ def calculate_surplus_data(sales_row):
     - Positive surplus indicates waste
     - Negative surplus indicates extra made when stock was sold out.
     """
-    print("Calculating Surplus Data...\n")
-    stock = SHEET.worksheet('stock').get_all_values()
-    pprint(stock)
+    print("Calculating surplus data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    stock_row = stock[-1]
+    print(stock_row)
 
 
 def main():
     """
-    run all program functions
+    Run all program functions
     """
     data = get_sales_data()
     sales_data = [int(num) for num in data]
@@ -88,5 +89,5 @@ def main():
     calculate_surplus_data(sales_data)
 
 
-print("Welcome to The Sarnie Shop data automation")
+print("Welcome to The Sarnie Shop Data Automation")
 main()
